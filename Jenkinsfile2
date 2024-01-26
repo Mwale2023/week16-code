@@ -1,13 +1,22 @@
-pipeline {
-    agent any
+ipeline {
+    agent any 
     tools {
         maven 'M2_HOME'
     }
     stages{
-        stage ('mvn commands'){
+        stage('sonarqube scan'){
+            steps{
+                withSonarQubeEnv('sonarserver'){ 
+              sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Mwale2023_week16-code'
+             // sh 'mvn sonar:sonar'
+            }
+            }
+        }
+        stage('all maven commands'){
             steps{
                 sh 'mvn clean test compile install package'
             }
         }
+
     }
 }
