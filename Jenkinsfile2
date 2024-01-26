@@ -8,7 +8,6 @@ pipeline {
             steps{
                 withSonarQubeEnv('sonarserver'){ 
               sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Mwale2023_week16-code'
-             // sh 'mvn sonar:sonar'
             }
             }
         }
@@ -17,6 +16,5 @@ pipeline {
                 sh 'mvn clean test compile install package'
             }
         }
-
     }
 }
