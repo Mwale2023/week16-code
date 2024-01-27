@@ -6,8 +6,8 @@ pipeline {
     stages{
         stage('sonarqube scan'){
             steps{
-                withSonarQubeEnv('sonarserver'){ 
-              // sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Mwale2023_week16-code'
+              withSonarQubeEnv('sonarserver'){ 
+               sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Mwale2023_week16-code'
              // sh 'mvn sonar:sonar'
             }
             }
