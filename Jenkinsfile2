@@ -20,9 +20,9 @@ pipeline {
         stage('upload artifact'){
             steps{
                  
-                sh 'curl -uadmin:AP5mZ1TGxbfJg5s8o7m1rRSRP4i -T \
+                sh 'curl -u admin:AP5mZ1TGxbfJg5s8o7m1rRSRP4i -T \
                 target/bio*.jar \
-                "http://52.23.253.203:8081/artifactory/geoapp/"'
+                "http://54.234.70.160:8081/artifactory/geoapp/"'
             }
         }
         stage ('image build'){
