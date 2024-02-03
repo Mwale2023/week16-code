@@ -1,25 +1,28 @@
 pipeline {
-    agent any
+    agent any 
     tools {
-    maven 'M2_HOME'
-}
+        maven 'M2_HOME'
+    }
     stages{
-        stage('clean oldartifacts '){
+        stage('sonarqube scan'){
             steps{
-                sh 'mvn clean'
+                withSonarQubeEnv('sonarserver'){ 
+              sh 'mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=Mwale2023_week16-code'
+             // sh 'mvn sonar:sonar'
+            }
             }
         }
-        stage('maven install and package'){
+        stage('all maven commands'){
             steps{
-                sh 'mvn install '
-                sh 'mvn package'
+                sh 'mvn clean test compile install package'
             }
         }
         stage('upload artifact'){
             steps{
+                 
                 sh 'curl -uadmin:AP5mZ1TGxbfJg5s8o7m1rRSRP4i -T \
                 target/bio*.jar \
-                "http://3.86.43.65:8081/artifactory/test/"'
+                "http://52.23.253.203:8081/artifactory/geoapp/"'
             }
         }
     }
